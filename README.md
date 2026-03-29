@@ -4,7 +4,11 @@
 AIを単体ではなく、役割を持つチームとして運用する実験プロジェクト
 
 # カルテットエージェンシー
-"C:\Users\hirom\OneDrive\Desktop\組織図.png"
+
+<img width="1003" height="563" alt="組織図" src="https://github.com/user-attachments/assets/047e89dd-7e0e-42b2-b535-d9c8cf23036d" />
+
+
+
 
 ## メンバー
 - petichan：構造・統括
