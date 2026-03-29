@@ -3,6 +3,9 @@
 ## 概要
 AIを単体ではなく、役割を持つチームとして運用する実験プロジェクト
 
+# カルテットエージェンシー
+"C:\Users\hirom\OneDrive\Desktop\組織図.png"
+
 ## メンバー
 - petichan：構造・統括
 - gemini：地図・可視化
