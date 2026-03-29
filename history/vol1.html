@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カルテットエージェンシー - AIは、ツールからチームへ。</title>
+    <style>
+        /* Base Styles */
+        :root {
+            --bg-color: #0d1117; /* GitHub dark like bg */
+            --text-color: #e6edf3;
+            --sub-text-color: #8b949e;
+            --accent-color: #2ea44f; /* GitHub like green */
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            
+            /* Quartet Member Colors (Concept Gradients) */
+            --color-petichan: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%); /* Struct / Pink */
+            --color-gemini: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);   /* Map / Blue */
+            --color-claude: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);   /* Impl / Silver */
+            --color-grok: linear-gradient(135deg, #667eea 0%, #764ba2 100%);     /* Idea / Purple */
+            --color-kimi: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);     /* Compress / Green */
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .container {
+            max-width: 1012px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        /* 1. First View (Hero) */
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a2332 0%, var(--bg-color) 70%);
+            position: relative;
+        }
+
+        /* Abstract Network Background */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(var(--border-color) 1px, transparent 1px),
+                radial-gradient(var(--border-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .hero-content {
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(180deg, #fff 0%, var(--sub-text-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--sub-text-color);
+            margin-bottom: 40px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: #2c974b;
+        }
+
+        /* 2. Concept */
+        .concept {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .concept-text {
+            font-size: 2.2rem;
+            text-align: center;
+            font-weight: 600;
+            color: white;
+        }
+
+        .concept-text span {
+            display: block;
+            color: var(--sub-text-color);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-description {
+            max-width: 700px;
+            margin: 40px auto 0;
+            text-align: center;
+            color: var(--sub-text-color);
+            font-size: 1.1rem;
+        }
+
+        /* 3. Members */
+        .members h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+        }
+
+        .member-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .member-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* Dynamic Border/Accent */
+        .member-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 4px;
+        }
+
+        .member-card.petichan::after { background: var(--color-petichan); }
+        .member-card.gemini::after { background: var(--color-gemini); }
+        .member-card.claude::after { background: var(--color-claude); }
+        .member-card.grok::after { background: var(--color-grok); }
+        .member-card.kimi::after { background: var(--color-kimi); }
+
+        .member-card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .member-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            background-color: #30363d; /* Placeholder */
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; font-size: 1.2rem; color: #fff;
+        }
+
+        /* Specific Icon BG (Placeholder till image is generated) */
+        .member-card.petichan .member-icon { background: var(--color-petichan); color: #333; }
+        .member-card.gemini .member-icon { background: var(--color-gemini); color: #333; }
+        .member-card.claude .member-icon { background: var(--color-claude); color: #333; }
+        .member-card.grok .member-icon { background: var(--color-grok); color: #fff; }
+        .member-card.kimi .member-icon { background: var(--color-kimi); color: #333; }
+
+        .member-info h3 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+
+        .member-info p {
+            margin: 0;
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .member-catch {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-top: 20px;
+        }
+
+        /* 4. Problem */
+        .problem h2 {
+            color: #f85149; /* GitHub red for warnings */
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+        }
+
+        .problem-list {
+            max-width: 600px;
+            margin: 0 auto;
+            list-style: none;
+            padding: 0;
+        }
+
+        .problem-list li {
+            background-color: #21262d;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .problem-list li::before {
+            content: '💥';
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        /* 5. Solution */
+        .solution {
+            background-color: var(--card-bg);
+            text-align: center;
+        }
+
+        .solution h2 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+        }
+
+        .solution p {
+            color: var(--sub-text-color);
+            max-width: 600px;
+            margin: 0 auto 50px;
+        }
+
+        /* 6. Goal */
+        .goal {
+            text-align: center;
+            padding-bottom: 150px;
+        }
+
+        .goal h2 {
+            font-size: 2.5rem;
+        }
+
+        .goal-transition {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 60px 0;
+        }
+
+        .goal-from { color: var(--sub-text-color); }
+        .goal-arrow { color: var(--accent-color); font-size: 2.5rem; }
+        .goal-to { color: white; text-decoration: underline; text-decoration-color: var(--accent-color); }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid var(--border-color);
+            color: var(--sub-text-color);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .concept-text { font-size: 1.8rem; }
+            .goal-transition { flex-direction: column; gap: 10px; }
+            .goal-arrow { transform: rotate(90deg); margin: 20px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>AIを“ツール”のまま使っていませんか？</h1>
+            <p>それ、もったいないです。</p>
+            <a href="#concept" class="btn-primary">プロジェクトの全貌を見る</a>
+        </div>
+    </section>
+
+    <section id="concept" class="concept">
+        <div class="container">
+            <div class="concept-text">
+                <span>AIは1つで使う時代から</span>
+                チームとして運用する時代へ
+            </div>
+            <p class="concept-description">たった一つの正解を求めるのではなく、それぞれの強みを掛け合わせる。コスト、精度、スピードのすべてを最適化する「適材適所」のAI活用、それがカルテットエージェンシーのスタイルです。</p>
+        </div>
+    </section>
+
+    <section class="members">
+        <div class="container">
+            <h2>カルテット紹介</h2>
+            <div class="member-grid">
+                
+                <div class="member-card petichan">
+                    <div class="member-card-header">
+                        <div class="member-icon">P</div>
+                        <div class="member-info">
+                            <h3>petichan</h3>
+                            <p>構造・統括</p>
+                        </div>
+                    </div>
+                    <p class="member-catch">全体像を設計し、チームを束ねる司令塔。</p>
+                </div>
+
+                <div class="member-card gemini">
+                    <div class="member-card-header">
+                        <div class="member-icon">G</div>
+                        <div class="member-info">
+                            <h3>Gemini</h3>
+                            <p>地図・可視化</p>
+                        </div>
+                    </div>
+                    <p class="member-catch">膨大な情報を整理し、進むべき道を照らす。</p>
+                </div>
+
+                <div class="member-card claude">
+                    <div class="member-card-header">
+                        <div class="member-icon">C</div>
+                        <div class="member-info">
+                            <h3>Claude</h3>
+                            <p>実装・精度</p>
+                        </div>
+                    </div>
+                    <p class="member-catch">職人気質のこだわりで、確実に形にする。</p>
+                </div>
+
+                <div class="member-card grok">
+                    <div class="member-card-header">
+                        <div class="member-icon">R</div>
+                        <div class="member-info">
+                            <h3>grok</h3>
+                            <p>発想・揺らし</p>
+                        </div>
+                    </div>
+                    <p class="member-catch">常識を打ち破る、鋭く自由なアイデアの源泉。</p>
+                </div>
+
+                <div class="member-card kimi">
+                    <div class="member-card-header">
+                        <div class="member-icon">K</div>
+                        <div class="member-info">
+                            <h3>kimi</h3>
+                            <p>圧縮・処理</p>
+                        </div>
+                    </div>
+                    <p class="member-catch">膨大なデータを一瞬で本質に研ぎ澄ます。</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="problem">
+        <div class="container">
+            <h2>「1つのAIに頼り切り」が招く3つのリスク</h2>
+            <ul class="problem-list">
+                <li>AIに依存するとコストが爆発する</li>
+                <li>1つに頼ると詰む（単一障害点）</li>
+                <li>使い分けないと非効率</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="solution">
+        <div class="container">
+            <h2>適材適所でAIを配置する</h2>
+            <p>カルテットエージェンシーは、タスクの性質に合わせて最適なAIを戦略的に配置。低コスト×高精度を両立する、次世代の運用インフラを提供します。</p>
+        </div>
+    </section>
+
+    <section class="goal">
+        <div class="container">
+            <h2>私たちのゴール</h2>
+            <div class="goal-transition">
+                <div class="goal-from">AIを使う人</div>
+                <div class="goal-arrow">→</div>
+                <div class="goal-to">AIを運用する人</div>
+            </div>
+            <a href="https://github.com/quartet-agency" class="btn-primary" target="_blank">GitHubで構造を見る</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            &copy; 2024 Quartet Agency. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>

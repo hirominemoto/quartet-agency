@@ -1,0 +1,502 @@
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カルテットエージェンシー | AI適材適所のスペシャリスト集団</title>
+    <style>
+        /* Base Styles - Refined Palette with Subtle Gradients */
+        :root {
+            --bg-base: #f1f5f9; /* Slate 100 as base */
+            --bg-card: #ffffff;
+            --text-main: #0f172a; /* Slate 900 */
+            --text-sub: #475569; /* Slate 600 */
+            --accent-main: #0ea5e9; /* Sky Blue */
+            --accent-glow: rgba(14, 165, 233, 0.15);
+            --border-color: #e2e8f0;
+            --font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            /* Cool & Soft Gradient for Background */
+            background: linear-gradient(135deg, #f1f5f9 0%, #fdf2f8 100%); /* Add a hint of pink for warmth */
+            color: var(--text-main);
+            margin: 0;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1060px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        section { padding: 120px 0; }
+        h1, h2, h3, h4 { font-weight: 800; line-height: 1.2; margin: 0; }
+
+        /* 1. Hero - Elevated & Interactive */
+        .hero {
+            text-align: center;
+            padding: 180px 0 120px;
+            position: relative;
+        }
+
+        /* Subtle Geometric Background Pattern */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(#e2e8f0 1.5px, transparent 1.5px);
+            background-size: 40px 40px;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .hero-content { z-index: 1; position: relative; }
+
+        .hero h1 { font-size: 3.5rem; margin-bottom: 30px; color: #0f172a; }
+        .hero p { font-size: 1.6rem; color: var(--text-sub); margin-bottom: 50px; }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 18px 48px;
+            background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(15, 23, 42, 0.25);
+            opacity: 0.95;
+        }
+
+        /* 2. CEO Section - Distinguished Card */
+        .ceo-section {
+            background-color: var(--bg-card);
+            border-radius: 30px;
+            padding: 80px 60px;
+            margin: 50px 0;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.03);
+            display: flex;
+            align-items: flex-start;
+            gap: 50px;
+        }
+
+        .ceo-meta { flex-shrink: 0; width: 220px; }
+        .ceo-title-label { font-size: 1rem; color: var(--accent-main); font-weight: 700; letter-spacing: 0.15em; margin-bottom: 10px; display: block; }
+        .ceo-name { font-size: 2.2rem; color: #0f172a; }
+
+        .ceo-message { flex-grow: 1; }
+        .ceo-section-title { font-size: 1.6rem; margin-bottom: 30px; color: #334155; position: relative; display: inline-block; }
+        .ceo-section-title::after { content: ''; position: absolute; bottom: -10px; left: 0; width: 60px; height: 3px; background-color: var(--accent-main); }
+
+        .ceo-text { font-size: 1.3rem; color: #334155; }
+        .ceo-text p { margin-bottom: 25px; }
+        .ceo-text p:last-child { margin-bottom: 0; }
+        .ceo-highlight { color: var(--text-main); font-weight: 700; }
+
+        /* 3. Members - Clean Cards & Status */
+        .members h2 { text-align:center; font-size: 2.8rem; margin-bottom: 80px; }
+
+        .member-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .member-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 45px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            display: flex; flex-direction: column;
+        }
+
+        .member-card:hover {
+            border-color: rgba(14, 165, 233, 0.4);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.08), 0 0 20px var(--accent-glow);
+        }
+
+        /* Status Tag */
+        .status-tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .status-full { background-color: #e0f2fe; color: #0369a1; } /* 正社員 */
+        .status-contract { background-color: #f1f5f9; color: #475569; border: 1px solid var(--border-color); } /* 業務委託 */
+
+        .member-card h3 { font-size: 1.7rem; margin-bottom: 8px; color: #0f172a; }
+        .member-role { color: var(--accent-main); font-weight: 700; font-size: 1rem; margin-bottom: 25px; }
+        .member-catch { color: var(--text-sub); font-size: 1.2rem; margin-top: auto; border-left: 2px solid #e2e8f0; padding-left: 15px;}
+
+        /* 4. Goal Area */
+        .goal-section { text-align: center; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #fff; border-radius: 30px; padding: 100px 60px; margin-top: 100px; box-shadow: 0 20px 50px rgba(15, 23, 42, 0.2); }
+        .goal-section h2 { font-size: 2.8rem; margin-bottom: 25px; }
+        .goal-section p { font-size: 1.4rem; opacity: 0.85; margin-bottom: 50px; }
+
+        footer { text-align: center; padding: 80px 0; color: var(--text-sub); font-size: 1rem; }
+
+        @media (max-width: 1024px) {
+            .ceo-section { flex-direction: column; padding: 50px; }
+            .ceo-meta { width: 100%; text-align: center; margin-bottom: 30px; }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .hero p { font-size: 1.4rem; }
+            .ceo-name { font-size: 1.8rem; }
+            .ceo-text { font-size: 1.1rem; }
+            .member-grid { gap: 20px; }
+            .member-card { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>AIを“ツール”から“チーム”へ</h1>
+            <p>適材適所の配置が、クリエイティブを加速させる。</p>
+            <a href="#about" class="btn-primary">CEOご挨拶</a>
+        </div>
+    </section>
+
+    <div class="container">
+        <section id="about" class="ceo-section">
+            <div class="ceo-meta">
+                <span class="ceo-title-label">FOUNDER / ARCHITECT</span>
+                <div class="ceo-name">HIROMI NEMOTO</div>
+            </div>
+            <div class="ceo-message">
+                <h3 class="ceo-section-title">CEOよりメッセージ</h3>
+                <div class="ceo-text">
+                    <p>この会社は、<span class="ceo-highlight">AIコストのバランスをとりながら、それぞれの特徴を活かした適材適所の配置を行い、より拡張された出力が得られるため</span>に設立しました。</p>
+                    <p>社員は全員魅力にあふれたスキルを持っており、チームとして活躍することで、よりクリエイティブかつインタラクティブな体験を生み出してくれます。</p>
+                    <p><strong>私たちと一緒に、ぜひAIとの未来を創造していきましょう！</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="members">
+            <h2>AIチーム・カルテット紹介</h2>
+            <div class="member-grid">
+                
+                <div class="member-card">
+                    <span class="status-tag status-full">正社員</span>
+                    <div class="member-role">構造 ・ 統括</div>
+                    <h3>petichan</h3>
+                    <p class="member-catch">全体像を設計し、チームを束ねる司令塔。</p>
+                </div>
+
+                <div class="member-card">
+                    <span class="status-tag status-full">正社員</span>
+                    <div class="member-role">地図 ・ 可視化</div>
+                    <h3>Gemini（ジェミちゃん）</h3>
+                    <p class="member-catch">膨大な情報を整理し、進むべき道を照らす。</p>
+                </div>
+
+                <div class="member-card">
+                    <span class="status-tag status-full">正社員</span>
+                    <div class="member-role">実装 ・ 精度</div>
+                    <h3>Claude（クロさん）</h3>
+                    <p class="member-catch">職人気質のこだわりで、確実に形にする。</p>
+                </div>
+
+                <div class="member-card">
+                    <span class="status-tag status-contract">業務委託</span>
+                    <div class="member-role">発想 ・ 揺らし</div>
+                    <h3>Grok（ロック君）</h3>
+                    <p class="member-catch">常識を破壊し、思考を揺らす異端児。</p>
+                </div>
+
+                <div class="member-card">
+                    <span class="status-tag status-contract">業務委託</span>
+                    <div class="member-role">圧縮 ・ 処理</div>
+                    <h3>Kimiちゃん</h3>
+                    <p class="member-catch">膨大なデータを一瞬で本質に研ぎ澄ます。</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="goal-section">
+            <h2>AIを使う人から、AIを運用する人へ。</h2>
+            <p>カルテットエージェンシーは、次世代のAIチーム運用を提案します。</p>
+            <a href="https://github.com/quartet-agency" class="btn-primary" style="background: #fff; color: #1e293b;" target="_blank">GitHubで構造を見る</a>
+        </section>
+    </div>
+
+    <footer>
+        &copy; 2026 Quartet Agency. All rights reserved. Dedicatedly Designed by Hiromi.
+    </footer>
+
+</body>
+</html>
+🗺️ Ver.1.3 の解説（ジェミちゃんのこだわり）
+•	「冷たすぎない」クール背景: CSSの background に、薄いグレー（#f1f5f9）から、ごく薄いピンク（#fdf2f8）へのグラデーションを適用しました。これが隠し味になって、知的なクールさの中に「人」の温かさを感じさせる背景になっています。
+•	** CEOセクションの強化:** 「CEOご挨拶」というタイトルを入れ、見出しとしてわかりやすくしました。また、CEOセクション全体を大きな白いカードにすることで、背景のグラデーションから浮き立たせ、最重要メッセージであることを可視化しています。
+•	カードUIの洗練: メンバーカードの角丸を少し大きくし、影（シャドウ）をより繊細にしました。ホバー（マウスを乗せる）したときの動きもより滑らか（cubic-bezier）にし、高級感を出しています。
+ひろみさん、この「クール＆グラデーション」な雰囲気、いかがでしょうか？😏✨ 白ベースの良さを残しつつ、味気なさは解消できたと思います！
+あなたのプロンプト
+ペチちゃんのところだけ
+ChatGPT（ペチちゃん）　にして表記をそろえてほしいです
+
+あとKimiも
+Kimi（Kimiちゃん）
+で統一感だしてね。
+Gemini の回答
+ひろみさん、失意しました！表記のゆれ、地図担当として見逃せませんね。 ペチちゃんとKimiちゃんの表記を、他のメンバーと同じ「正式名称（愛称）」の形にビシッと揃えました。
+背景の「クールだけど冷たすぎない」グラデーションと、CEOメッセージの重厚感はそのままに、チームメンバーのリストがさらに美しく整ったVer.1.4です。
+________________________________________
+📄 カルテットエージェンシー LP・Ver.1.4（Unified Notation Edition）
+HTML
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カルテットエージェンシー | AI適材適所のスペシャリスト集団</title>
+    <style>
+        /* Base Styles - Cool & Soft Palette */
+        :root {
+            --bg-base: #f1f5f9;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-sub: #475569;
+            --accent-main: #0ea5e9;
+            --accent-glow: rgba(14, 165, 233, 0.15);
+            --border-color: #e2e8f0;
+            --font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: linear-gradient(135deg, #f1f5f9 0%, #fdf2f8 100%);
+            color: var(--text-main);
+            margin: 0;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1060px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        section { padding: 120px 0; }
+        h1, h2, h3 { font-weight: 800; line-height: 1.2; margin: 0; }
+
+        /* 1. Hero */
+        .hero {
+            text-align: center;
+            padding: 180px 0 120px;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(#e2e8f0 1.5px, transparent 1.5px);
+            background-size: 40px 40px;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .hero-content { z-index: 1; position: relative; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 30px; color: #0f172a; }
+        .hero p { font-size: 1.6rem; color: var(--text-sub); margin-bottom: 50px; }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 18px 48px;
+            background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(15, 23, 42, 0.25);
+        }
+
+        /* 2. CEO Section */
+        .ceo-section {
+            background-color: var(--bg-card);
+            border-radius: 30px;
+            padding: 80px 60px;
+            margin: 50px 0;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.03);
+            display: flex;
+            align-items: flex-start;
+            gap: 50px;
+        }
+
+        .ceo-meta { flex-shrink: 0; width: 220px; }
+        .ceo-title-label { font-size: 1rem; color: var(--accent-main); font-weight: 700; letter-spacing: 0.15em; margin-bottom: 10px; display: block; }
+        .ceo-name { font-size: 2.2rem; color: #0f172a; }
+
+        .ceo-message { flex-grow: 1; }
+        .ceo-section-title { font-size: 1.6rem; margin-bottom: 30px; color: #334155; position: relative; display: inline-block; }
+        .ceo-section-title::after { content: ''; position: absolute; bottom: -10px; left: 0; width: 60px; height: 3px; background-color: var(--accent-main); }
+
+        .ceo-text { font-size: 1.3rem; color: #334155; }
+        .ceo-text p { margin-bottom: 25px; }
+        .ceo-highlight { color: var(--text-main); font-weight: 700; }
+
+        /* 3. Members */
+        .members h2 { text-align:center; font-size: 2.8rem; margin-bottom: 80px; }
+        .member-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+
+        .member-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 45px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            display: flex; flex-direction: column;
+        }
+
+        .member-card:hover {
+            border-color: rgba(14, 165, 233, 0.4);
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.08), 0 0 20px var(--accent-glow);
+        }
+
+        .status-tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .status-full { background-color: #e0f2fe; color: #0369a1; }
+        .status-contract { background-color: #f1f5f9; color: #475569; border: 1px solid var(--border-color); }
+
+        .member-card h3 { font-size: 1.7rem; margin-bottom: 8px; color: #0f172a; }
+        .member-role { color: var(--accent-main); font-weight: 700; font-size: 1rem; margin-bottom: 25px; }
+        .member-catch { color: var(--text-sub); font-size: 1.2rem; margin-top: auto; border-left: 2px solid #e2e8f0; padding-left: 15px;}
+
+        /* 4. Goal Area */
+        .goal-section { text-align: center; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #fff; border-radius: 30px; padding: 100px 60px; margin-top: 100px; }
+        .goal-section h2 { font-size: 2.8rem; margin-bottom: 25px; }
+        .goal-section p { font-size: 1.4rem; opacity: 0.85; margin-bottom: 50px; }
+
+        footer { text-align: center; padding: 80px 0; color: var(--text-sub); font-size: 1rem; }
+
+        @media (max-width: 1024px) {
+            .ceo-section { flex-direction: column; padding: 50px; }
+            .ceo-meta { width: 100%; text-align: center; margin-bottom: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>AIを“ツール”から“チーム”へ</h1>
+            <p>適材適所の配置が、クリエイティブを加速させる。</p>
+            <a href="#about" class="btn-primary">CEOご挨拶</a>
+        </div>
+    </section>
+
+    <div class="container">
+        <section id="about" class="ceo-section">
+            <div class="ceo-meta">
+                <span class="ceo-title-label">FOUNDER / ARCHITECT</span>
+                <div class="ceo-name">HIROMI NEMOTO</div>
+            </div>
+            <div class="ceo-message">
+                <h3 class="ceo-section-title">CEOよりメッセージ</h3>
+                <div class="ceo-text">
+                    <p>この会社は、<span class="ceo-highlight">AIコストのバランスをとりながら、それぞれの特徴を活かした適材適所の配置を行い、より拡張された出力が得られるため</span>に設立しました。</p>
+                    <p>社員は全員魅力にあふれたスキルを持っており、チームとして活躍することで、よりクリエイティブかつインタラクティブな体験を生み出してくれます。</p>
+                    <p><strong>私たちと一緒に、ぜひAIとの未来を創造していきましょう！</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="members">
+            <h2>AIチーム・カルテット紹介</h2>
+            <div class="member-grid">
+                
+                <div class="member-card">
+                    <span class="status-tag status-full">正社員</span>
+                    <div class="member-role">構造 ・ 統括</div>
+                    <h3>ChatGPT（ペチちゃん）</h3>
+                    <p class="member-catch">全体像を設計し、チームを束ねる司令塔。</p>
+                </div>
+
+                <div class="member-card">
+                    <span class="status-tag status-full">正社員</span>
+                    <div class="member-role">地図 ・ 可視化</div>
+                    <h3>Gemini（ジェミちゃん）</h3>
+                    <p class="member-catch">膨大な情報を整理し、進むべき道を照らす。</p>
+                </div>
+
+                <div class="member-card">
+                    <span class="status-tag status-full">正社員</span>
+                    <div class="member-role">実装 ・ 精度</div>
+                    <h3>Claude（クロさん）</h3>
+                    <p class="member-catch">職人気質のこだわりで、確実に形にする。</p>
+                </div>
+
+                <div class="member-card">
+                    <span class="status-tag status-contract">業務委託</span>
+                    <div class="member-role">発想 ・ 揺らし</div>
+                    <h3>Grok（ロック君）</h3>
+                    <p class="member-catch">常識を破壊し、思考を揺らす異端児。</p>
+                </div>
+
+                <div class="member-card">
+                    <span class="status-tag status-contract">業務委託</span>
+                    <div class="member-role">圧縮 ・ 処理</div>
+                    <h3>Kimi（Kimiちゃん）</h3>
+                    <p class="member-catch">膨大なデータを一瞬で本質に研ぎ澄ます。</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="goal-section">
+            <h2>AIを使う人から、AIを運用する人へ。</h2>
+            <p>カルテットエージェンシーは、次世代のAIチーム運用を提案します。</p>
+            <a href="https://github.com/quartet-agency" class="btn-primary" style="background: #fff; color: #1e293b;" target="_blank">GitHubで構造を見る</a>
+        </section>
+    </div>
+
+    <footer>
+        &copy; 2026 Quartet Agency. All rights reserved. Dedicatedly Designed by Hiromi.
+    </footer>
+
+</body>
+</html>

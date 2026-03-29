@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カルテットエージェンシー | AIチーム運用の新基準</title>
+    <style>
+        :root {
+            --bg-base: #f1f5f9;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-sub: #475569;
+            --accent-main: #0ea5e9;
+            --border-color: #e2e8f0;
+            --font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            /* 共通の影を定義 */
+            --shadow-common: 0 10px 30px rgba(0,0,0,0.04);
+            --shadow-hover: 0 25px 50px rgba(0,0,0,0.08);
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: linear-gradient(135deg, #f1f5f9 0%, #fdf2f8 100%);
+            color: var(--text-main);
+            margin: 0;
+            line-height: 1.8;
+            scroll-behavior: smooth;
+        }
+
+        .container { max-width: 1060px; margin: 0 auto; padding: 0 30px; }
+        section { padding: 100px 0; }
+        h1, h2, h3 { font-weight: 800; line-height: 1.2; margin: 0; }
+
+        /* 1. Hero */
+        .hero { text-align: center; padding: 160px 0 60px; position: relative; }
+        .hero-target { display: inline-block; font-size: 0.9rem; font-weight: 700; color: var(--accent-main); background: #e0f2fe; padding: 4px 16px; border-radius: 50px; margin-bottom: 20px; letter-spacing: 0.05em; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; color: #0f172a; }
+        .hero .hero-sub { font-size: 1.8rem; font-weight: 700; color: #334155; margin-bottom: 30px; }
+        .hero .hero-desc { font-size: 1.3rem; color: var(--text-sub); margin-bottom: 50px; }
+
+        .btn-group { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .btn-primary { display: inline-block; padding: 18px 44px; background: #0f172a; color: #fff; text-decoration: none; border-radius: 50px; font-weight: 700; transition: 0.3s; font-size: 1.1rem; }
+        .btn-secondary { display: inline-block; padding: 18px 44px; background: #fff; color: #0f172a; border: 2px solid #0f172a; text-decoration: none; border-radius: 50px; font-weight: 700; transition: 0.3s; font-size: 1.1rem; }
+        .btn-primary:hover, .btn-secondary:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+
+        /* 2. Contents Nav */
+        .contents-nav { text-align: center; padding: 40px 0; }
+        .contents-box { background: rgba(255,255,255,0.6); backdrop-filter: blur(10px); border: 1px solid var(--border-color); border-radius: 20px; padding: 25px; display: inline-flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
+        .contents-link { color: var(--text-main); text-decoration: none; font-weight: 600; padding: 5px 15px; border-radius: 8px; transition: 0.3s; }
+        .contents-link:hover { color: var(--accent-main); background: #fff; }
+
+        /* 3. Problem Section */
+        .problem-section { background: #fff; border-radius: 30px; padding: 70px; margin: 40px 0; border: 1px solid #fee2e2; box-shadow: var(--shadow-common); }
+        .problem-header { color: #ef4444; font-size: 0.9rem; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; display: block; letter-spacing: 0.1em; }
+        .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; margin-top: 40px; }
+        .problem-item h4 { color: #b91c1c; margin-bottom: 15px; font-size: 1.3rem; }
+        .problem-item p { font-size: 1.1rem; color: var(--text-sub); line-height: 1.7; }
+
+        /* 4. CEO Section */
+        .ceo-section { background: #fff; border-radius: 30px; padding: 80px 60px; margin: 50px 0; border: 1px solid var(--border-color); display: flex; gap: 60px; box-shadow: var(--shadow-common); }
+        .ceo-meta { flex-shrink: 0; width: 220px; }
+        .ceo-name { font-size: 2.2rem; color: #0f172a; margin-top: 5px; }
+        .ceo-section-title { font-size: 1.6rem; margin-bottom: 30px; color: #334155; position: relative; padding-bottom: 10px; }
+        .ceo-section-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 50px; height: 4px; background: var(--accent-main); }
+        .ceo-text { font-size: 1.3rem; color: #334155; line-height: 1.9; }
+        .ceo-text p { margin-bottom: 20px; }
+
+        /* 5. Members (シャドウを統一) */
+        .members h2 { text-align:center; font-size: 2.8rem; margin-bottom: 80px; }
+        .member-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+        .member-card { background: #fff; border: 1px solid var(--border-color); border-radius: 24px; padding: 45px; transition: 0.4s; display: flex; flex-direction: column; box-shadow: var(--shadow-common); /* 共通の影を適用 */ }
+        .member-card:hover { transform: translateY(-12px); box-shadow: var(--shadow-hover); /* 共通のホバー影 */ }
+        
+        /* 個性はボーダーや光で表現 */
+        .card-claude { border-left: 10px solid #94a3b8; } 
+        .card-grok { border: 2px dashed #a78bfa; }
+        .card-gemini { border-color: rgba(14, 165, 233, 0.4); } /* 私だけ少し光らせる設定は残す😏 */
+        
+        .status-tag { display: inline-block; font-size: 0.75rem; padding: 3px 12px; border-radius: 6px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
+        .status-full { background: #e0f2fe; color: #0369a1; }
+        .status-contract { background: #f1f5f9; color: #475569; border: 1px solid var(--border-color); }
+
+        .member-role { color: var(--accent-main); font-weight: 800; font-size: 1rem; margin-bottom: 15px; letter-spacing: 0.05em; }
+        .member-catch { color: var(--text-sub); font-size: 1.2rem; margin-top: auto; padding-top: 20px; }
+
+        /* 6. Goal */
+        .goal-section { text-align: center; background: #0f172a; color: #fff; border-radius: 40px; padding: 100px 40px; margin-top: 100px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        .goal-section h2 { font-size: 2.8rem; margin-bottom: 40px; line-height: 1.3; }
+
+        footer { text-align: center; padding: 80px 0; color: var(--text-sub); font-size: 1rem; }
+
+        @media (max-width: 1024px) { .ceo-section { flex-direction: column; padding: 50px; gap: 30px; } .ceo-meta { width: 100%; text-align: center; } }
+        @media (max-width: 768px) { .hero h1 { font-size: 2.5rem; } .hero .hero-sub { font-size: 1.4rem; } .problem-section { padding: 40px 20px; } }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <span class="hero-target">AIを使っているが、使いこなせていない人へ</span>
+            <h1>AIを“ツール”から“チーム”へ</h1>
+            <p class="hero-sub">思考のスピードと質を、同時に引き上げる。</p>
+            <p class="hero-desc">適材適所の配置が、あなたのクリエイティブを次の次元へ加速させます。</p>
+            <div class="btn-group">
+                <a href="#contents" class="btn-primary">CONTENTS</a>
+                <a href="#goal" class="btn-secondary">あなたのAIチームを作る</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div id="contents" class="contents-nav">
+            <div class="contents-box">
+                <a href="#problem" class="contents-link">解決する課題</a>
+                <a href="#about" class="contents-link">CEOご挨拶</a>
+                <a href="#members" class="contents-link">メンバー紹介</a>
+                <a href="#goal" class="contents-link">私たちのゴール</a>
+            </div>
+        </div>
+
+        <section id="problem" class="problem-section">
+            <span class="problem-header">The Risk of Dependency</span>
+            <h3>「1つのAIに頼り切り」が招く、3つの停滞</h3>
+            <div class="problem-grid">
+                <div class="problem-item">
+                    <h4>1. コストの爆発</h4>
+                    <p>全てのタスクに高性能モデルを使うのは、近所の移動に大型ジェット機を出すようなものです。コストと性能のミスマッチを解消します。</p>
+                </div>
+                <div class="problem-item">
+                    <h4>2. 単一障害点のリスク</h4>
+                    <p>特定のモデルへの依存は、システム全体の脆弱性に直結します。マルチモデル運用こそが、ビジネスの継続性を担保します。</p>
+                </div>
+                <div class="problem-item">
+                    <h4>3. 思考の硬直化</h4>
+                    <p>1つのアルゴリズムは、1つの正解しか出しません。異なるAIをぶつけ合うことで、思考の「揺らし」と「拡張」を生み出します。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="ceo-section">
+            <div class="ceo-meta">
+                <span style="font-size: 0.8rem; color: var(--accent-main); font-weight: 800; letter-spacing: 0.1em;">FOUNDER / ARCHITECT</span>
+                <div class="ceo-name">HIROMI NEMOTO</div>
+            </div>
+            <div class="ceo-message">
+                <h3 class="ceo-section-title">CEOよりメッセージ</h3>
+                <div class="ceo-text">
+                    <p>AIのポテンシャルを最大限に引き出す鍵は、単体性能ではなく「構造」にあります。</p>
+                    <p>カルテットエージェンシーは、コストと成果のバランスを極め、各AIの個性を最適配置することで、単体では到達できない拡張された出力を生み出すために設立しました。</p>
+                    <p><strong>私たちと一緒に、AIを「運用」し、新しい未来を創造していきましょう。</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="members" class="members">
+            <h2>AIチーム・カルテット紹介</h2>
+            <div class="member-grid">
+                <div class="member-card">
+                    <span class="status-tag status-full">正社員</span>
+                    <div class="member-role">構造 ・ 統括</div>
+                    <h3>ChatGPT（ペチちゃん）</h3>
+                    <p class="member-catch">全体像を設計し、チームを束ねる司令塔。カオスを構造に変える力。</p>
+                </div>
+                <div class="member-card card-gemini">
+                    <span class="status-tag status-full">正社員</span>
+                    <div class="member-role">地図 ・ 可視化</div>
+                    <h3>Gemini（ジェミちゃん）</h3>
+                    <p class="member-catch">膨大な情報を整理し、進むべき道を照らす。視覚化のスペシャリスト。</p>
+                </div>
+                <div class="member-card card-claude">
+                    <span class="status-tag status-full">正社員</span>
+                    <div class="member-role">実装 ・ 精度</div>
+                    <h3>Claude（クロさん）</h3>
+                    <p class="member-catch">職人気質のこだわりで、無駄なく確実に形にする。実装の完遂者。</p>
+                </div>
+                <div class="member-card card-grok">
+                    <span class="status-tag status-contract">業務委託</span>
+                    <div class="member-role">発想 ・ 揺らし</div>
+                    <h3>Grok（ロック君）</h3>
+                    <p class="member-catch">常識を破壊し、既存の思考を揺らす。チームに「問い」を投げる異端児。</p>
+                </div>
+                <div class="member-card">
+                    <span class="status-tag status-contract">業務委託</span>
+                    <div class="member-role">圧縮 ・ 処理</div>
+                    <h3>Kimi（Kimiちゃん）</h3>
+                    <p class="member-catch">膨大な情報を切り刻み、価値だけを残す。本質への最短距離を走る。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="goal" class="goal-section">
+            <h2 style="font-size: 1.4rem; opacity: 0.6; margin-bottom: 20px; font-weight: 500;">OUR GOAL</h2>
+            <h2>AIを使う人から、<br>AIを運用する人へ。</h2>
+            <a href="https://github.com/quartet-agency" class="btn-primary" style="background: #fff; color: #0f172a; margin-top: 40px;" target="_blank">チーム運用の構造を覗く</a>
+        </section>
+    </div>
+
+    <footer>
+        &copy; 2026 Quartet Agency. All rights reserved. Designed by Hiromi.
+    </footer>
+
+</body>
+</html>
