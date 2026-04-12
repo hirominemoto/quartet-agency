@@ -1,3 +1,4 @@
+<img width="865" height="459" alt="カルテット組織図" src="https://github.com/user-attachments/assets/e2d3866a-91c9-478b-b9a2-056d3a4cd179" />
 
 
 # カルテットエージェンシー
