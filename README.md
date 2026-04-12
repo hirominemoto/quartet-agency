@@ -2,7 +2,7 @@
 
 # カルテットエージェンシー
 
-<img width="1003" height="563" alt="組織図" src="https://github.com/user-attachments/assets/047e89dd-7e0e-42b2-b535-d9c8cf23036d" />
+[<img width="1003" height="563" alt="組織図" src="https://github.com/user-attachments/assets/047e89dd-7e0e-42b2-b535-d9c8cf23036d" />](https://github.com/hirominemoto/quartet-agency/blob/main/%E3%82%AB%E3%83%AB%E3%83%86%E3%83%83%E3%83%88%E7%B5%84%E7%B9%94%E5%9B%B3.png?raw=true)
 
 ## この会社は、AIコストのバランスを整えながら適材適所に役割を配置する目的で設立する
 
