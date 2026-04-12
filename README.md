@@ -2,7 +2,7 @@
 
 # カルテットエージェンシー
 
-"C:\Users\hirom\OneDrive\Desktop\カルテット組織図.png"
+https://github.com/hirominemoto/quartet-agency/blob/main/%E3%82%AB%E3%83%AB%E3%83%86%E3%83%83%E3%83%88%E7%B5%84%E7%B9%94%E5%9B%B3.png?raw=true
 
 ## この会社は、AIコストのバランスを整えながら適材適所に役割を配置する目的で設立する
 
