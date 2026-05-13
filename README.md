@@ -4,7 +4,7 @@
 
 ![組織図](カルテット組織図.png)
 
-file:///C:/Users/hirom/OneDrive/Desktop/index.html
+https://reliable-crumble-a4284c.netlify.app/
 
 ## この会社は、AIコストのバランスを整えながら適材適所に役割を配置する目的で設立する
 
